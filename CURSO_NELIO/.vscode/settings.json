@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "baskara.C": "cpp",
+        "math.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}
