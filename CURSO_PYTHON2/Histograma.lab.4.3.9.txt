@@ -1,0 +1,7 @@
+este arquivo e um teste para o programa de leitura de historiograma feito no curso, o codigo deve ler o arquivo e contar os caracteres presentes neles sendo somente as letras e mostrar quantas vezes cada letra aparece no arquivo
+aaaaaaaaa
+ggggggggggggggggggg
+bbbbbbbbbbbbbbbb
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+uyuuuuuuuuuuuuuuuuuuuuuuu
+weedfgavaedjfvbaidjskc qbejf vajbcvuiankjdvhjaksbcv
