@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Roast | Café Artesanal Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #D4AF37; /* Dourado */
+            --secondary: #1a1a1a; /* Preto Fosco */
+            --dark: #000000;
+            --light: #f4f4f4;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--dark); color: var(--light); line-height: 1.6; }
+        
+        /* --- LAYOUT --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(0,0,0,0.9);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.5rem; }
+        
+        .cart-icon { position: relative; cursor: pointer; }
+        #cart-count { 
+            background: var(--primary); color: var(--dark); 
+            border-radius: 50%; padding: 2px 7px; font-size: 0.8rem; 
+            position: absolute; top: -10px; right: -10px; font-weight: bold;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=1470') center/cover;
+            padding: 0 20px;
+        }
+
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--primary); margin-bottom: 15px; }
+        .hero p { font-size: 1.1rem; margin-bottom: 30px; max-width: 600px; }
+        .cta-btn { 
+            background: var(--primary); color: var(--dark); padding: 15px 40px; 
+            text-decoration: none; font-weight: 600; border-radius: 5px; 
+            transition: var(--transition); text-transform: uppercase;
+        }
+        .cta-btn:hover { background: var(--white); transform: scale(1.05); }
+
+        /* --- PRODUCTS SECTION --- */
+        .products { padding: 80px 5%; }
+        .section-title { text-align: center; margin-bottom: 50px; font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        
+        .product-card { 
+            background: #111; border: 1px solid #333; padding: 20px; border-radius: 10px; text-align: center;
+            transition: var(--transition);
+        }
+        .product-card:hover { border-color: var(--primary); }
+        .product-card img { width: 100%; border-radius: 8px; margin-bottom: 15px; }
+        .product-card h3 { margin-bottom: 10px; }
+        .price { color: var(--primary); font-size: 1.5rem; font-weight: 600; margin-bottom: 15px; display: block; }
+        .add-to-cart { 
+            background: transparent; border: 1px solid var(--primary); color: var(--primary); 
+            padding: 10px 20px; cursor: pointer; border-radius: 5px; width: 100%; font-weight: 600;
+        }
+        .add-to-cart:hover { background: var(--primary); color: var(--dark); }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials { background: #0a0a0a; padding: 80px 5%; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .testimonial-card { font-style: italic; background: #111; padding: 30px; border-left: 4px solid var(--primary); }
+
+        /* --- MODAL CARRINHO --- */
+        #cart-modal {
+            display: none; position: fixed; right: 0; top: 0; width: 400px; height: 100%;
+            background: var(--secondary); z-index: 2000; padding: 30px; box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            overflow-y: auto;
+        }
+        @media (max-width: 500px) { #cart-modal { width: 100%; } }
+        
+        .cart-item { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding: 10px 0; }
+        .total-price { font-size: 1.5rem; margin: 20px 0; text-align: right; color: var(--primary); }
+        .checkout-btn { 
+            background: #25d366; color: white; border: none; padding: 15px; width: 100%; 
+            border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 1rem;
+        }
+
+        .close-cart { cursor: pointer; float: right; font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">GOLDEN ROAST</div>
+        <div class="cart-icon" onclick="toggleCart()">
+            🛒 <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>O Café dos Deuses</h1>
+        <p>Grãos selecionados a mais de 1.200m de altitude. Experiência sensorial única em cada xícara.</p>
+        <a href="#produtos" class="cta-btn">Comprar Agora</a>
+    </section>
+
+    <section class="products" id="produtos">
+        <h2 class="section-title">Nossa Seleção</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&q=80&w=400" alt="Café Intense">
+                <h3>Reserva Dark</h3>
+                <span class="price">R$ 45,00</span>
+                <button class="add-to-cart" onclick="addToCart('Reserva Dark', 45.00)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&q=80&w=400" alt="Café Suave">
+                <h3>Velvet Gold</h3>
+                <span class="price">R$ 52,00</span>
+                <button class="add-to-cart" onclick="addToCart('Velvet Gold', 52.00)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&q=80&w=400" alt="Café Especial">
+                <h3>Floral Honey</h3>
+                <span class="price">R$ 58,00</span>
+                <button class="add-to-cart" onclick="addToCart('Floral Honey', 58.00)">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="section-title">Quem provou, amou</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">"Melhor aroma que já senti. A entrega foi super rápida e o packaging é lindo!" <br><strong>- Ricardo S.</strong></div>
+            <div class="testimonial-card">"O Velvet Gold é perfeito para quem gosta de notas doces. Recomendo muito." <br><strong>- Ana Paula.</strong></div>
+        </div>
+    </section>
+
+    <div id="cart-modal">
+        <span class="close-cart" onclick="toggleCart()">&times; Fechar</span>
+        <h2>Seu Carrinho</h2>
+        <div id="cart-items-list">
+            </div>
+        <div class="total-price">Total: R$ <span id="total-val">0,00</span></div>
+        <button class="checkout-btn" onclick="sendWhatsApp()">Finalizar pedido via WhatsApp</button>
+    </div>
+
+    
+<script>
+    // --- CONFIGURAÇÃO ---
+    const SEU_WHATSAPP = "5534996638395"; // <--- COLOQUE SEU NÚMERO AQUI (DDI + DDD + NÚMERO)
+    
+    let cart = [];
+    let total = 0;
+
+    function toggleCart() {
+        const modal = document.getElementById('cart-modal');
+        modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function addToCart(name, price) {
+        cart.push({ name, price });
+        updateCart();
+        // Feedback visual de sucesso
+        const btn = event.target;
+        const originalText = btn.innerText;
+        btn.innerText = "✓ Adicionado";
+        btn.style.background = "#25d366";
+        btn.style.color = "white";
+        
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.style.background = "transparent";
+            btn.style.color = "var(--primary)";
+        }, 1500);
+    }
+
+    function updateCart() {
+        const list = document.getElementById('cart-items-list');
+        const count = document.getElementById('cart-count');
+        const totalDisplay = document.getElementById('total-val');
+        
+        list.innerHTML = "";
+        total = 0;
+
+        cart.forEach((item, index) => {
+            total += item.price;
+            list.innerHTML += `
+                <div class="cart-item">
+                    <div>
+                        <strong>${item.name}</strong><br>
+                        <small>Unidade</small>
+                    </div>
+                    <span>R$ ${item.price.toFixed(2).replace('.', ',')}</span>
+                </div>
+            `;
+        });
+
+        count.innerText = cart.length;
+        totalDisplay.innerText = total.toFixed(2).replace('.', ',');
+    }
+
+    function sendWhatsApp() {
+        if (cart.length === 0) {
+            alert("Seu carrinho está vazio! Escolha um café especial primeiro.");
+            return;
+        }
+
+        let message = "*NOVO PEDIDO - GOLDEN ROAST*\n";
+        message += "---------------------------\n";
+        
+        // Agrupa itens repetidos para ficar mais limpo
+        const summary = cart.reduce((acc, curr) => {
+            acc[curr.name] = (acc[curr.name] || 0) + 1;
+            return acc;
+        }, {});
+
+        for (const [name, qty] of Object.entries(summary)) {
+            message += `${qty}x ${name}\n`;
+        }
+
+        message += "---------------------------\n";
+        message += `*Total: R$ ${total.toFixed(2).replace('.', ',')}*\n\n`;
+        message += "Gostaria de combinar a entrega/retirada. Como procedemos?";
+
+        const encodedMessage = encodeURIComponent(message);
+        window.open(`https://wa.me/${SEU_WHATSAPP}?text=${encodedMessage}`, '_blank');
+    }
+</script>
+
+/* --- FAQ SECTION --- */
+.faq { padding: 80px 5%; background: var(--dark); }
+.faq-container { max-width: 800px; margin: 0 auto; }
+
+.faq-item {
+    border-bottom: 1px solid #333;
+    padding: 15px 0;
+    cursor: pointer;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    color: #ccc;
+    padding-top: 10px;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px; /* Ajuste conforme o tamanho do texto */
+}
+
+.faq-icon {
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(180deg);
+}
+
+
+<section class="faq">
+    <h2 class="section-title">Dúvidas Frequentes</h2>
+    <div class="faq-container">
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">
+                Qual o prazo de entrega para Uberlândia?
+                <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Para nossa região, as entregas costumam ocorrer em até 24h após a confirmação do pedido. Você também pode optar por retirar em mãos.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">
+                Os grãos são moídos na hora?
+                <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Sim! Você pode escolher entre receber o grão inteiro ou moído especificamente para o seu método de preparo (Coador, Prensa Francesa, Espresso, etc).</p>
+            </div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">
+                Quais as formas de pagamento?
+                <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Aceitamos PIX, cartões de crédito e débito. O pagamento é finalizado de forma segura diretamente no nosso atendimento via WhatsApp.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">
+                Como sei qual café escolher?
+                <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Nossas descrições ajudam a identificar as notas sensoriais, mas se tiver dúvida, chame a gente no WhatsApp! Nosso barista vai te indicar o grão perfeito para o seu paladar.</p>
+            </div>
+        </div>
+    </div>
+</section>
