@@ -4,8 +4,8 @@ public class Retangulo {
     private double altura;
     private double largura;
 
-    //  método para dar valor às variáveis da classe
-    public void setValores(double altura, double largura) {
+    //  método para construtor às variáveis da classe
+    public Retangulo(double altura, double largura) {
         this.altura = altura; 
         this.largura = largura;}
 
@@ -14,9 +14,8 @@ public class Retangulo {
 
     public double calcularPerimetro() {
         return (this.altura + this.largura) * 2;}
+    public double getAltura(){
+        return this.altura;
+    }
 
-    public void exibirInfo() {
-        
-        System.out.println("Area = " + calcularArea());
-        System.out.println("Perimetro = " + calcularPerimetro());}
 }
