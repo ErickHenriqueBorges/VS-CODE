@@ -78,8 +78,33 @@ button:hover { filter: brightness(1.2); box-shadow: 0 0 15px var(--primary); }
 
 @media (max-width: 600px) {
     .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        /* Mudamos para 140px para garantir que caibam dois em qualquer celular */
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+        gap: 1rem; /* Diminuímos o espaço entre eles para ganhar área útil */
     }
-    .card-img { height: 150px; }
+
+    .container {
+        padding: 2rem 1rem; /* Reduzimos o respiro lateral da página */
+    }
+
+    .card-img { 
+        height: 140px; /* Deixamos a imagem mais baixa para não ocupar a tela toda */
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .card-body h3 {
+        font-size: 1.1rem; /* Títulos menores para não quebrar linha toda hora */
+    }
+
+    .price {
+        font-size: 1.2rem;
+    }
+
+    button {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
 }
