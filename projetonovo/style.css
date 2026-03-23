@@ -79,7 +79,7 @@ button:hover { filter: brightness(1.2); box-shadow: 0 0 15px var(--primary); }
 @media (max-width: 600px) {
     .products-grid {
         /* Mudamos para 140px para garantir que caibam dois em qualquer celular */
-        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); 
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
         gap: 1rem; /* Diminuímos o espaço entre eles para ganhar área útil */
     }
 
