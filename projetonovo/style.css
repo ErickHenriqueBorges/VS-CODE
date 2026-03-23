@@ -75,3 +75,11 @@ button {
 }
 
 button:hover { filter: brightness(1.2); box-shadow: 0 0 15px var(--primary); }
+
+@media (max-width: 600px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    .card-img { height: 150px; }
+}
