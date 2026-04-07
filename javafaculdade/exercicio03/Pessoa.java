@@ -1,8 +1,8 @@
-package exerciciodefixar.ex003;
+package exercicio03;
 
 public class Pessoa {
     private final String nome; // lembrando que isso deixa o atributo imutavel;
-    private int idade;
+    private  final int idade;
     public Pessoa(String nome, int idade){
         this.idade=idade;
         this.nome=nome;
@@ -10,20 +10,20 @@ public class Pessoa {
     public void getdados(){
         System.out.print("\nNome :"+this.nome);
         System.out.println("\nIdade :"+this.idade);
-        System.out.print("Maior de idade :"+verificador());
+    
     }
-    public boolean verificador(){
-        return this.idade>=18;
+    public void verificador(){
+        if (idade>=18){
+            System.out.print("Maior de idade ");
+        }
+        else{
+            System.out.print("Menor de idade ");
+        }
+        
     }
 
-    public int getidade() {
-        return this.idade;
-    }
-
-    public void setidade(int idade) {
-        this.idade = idade;
-    }
     
 }
 
 
+ 

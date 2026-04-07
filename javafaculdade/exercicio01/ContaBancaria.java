@@ -1,4 +1,4 @@
-package exerciciodefixar.ex001;
+package exercicio01;
 
 public class ContaBancaria {
     private final String titular;//uma vez que eu colocar algo dentro de titular nao tera como ser alterado 

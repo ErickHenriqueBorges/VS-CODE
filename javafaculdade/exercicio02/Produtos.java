@@ -1,4 +1,4 @@
-package exerciciodefixar.ex002;
+package exercicio02;
 
 public class Produtos {
     private final String produto;

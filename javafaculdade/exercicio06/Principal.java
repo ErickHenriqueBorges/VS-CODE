@@ -1,4 +1,4 @@
-package Exercicio3;
+package exercicio06;
 public class Principal {
     public static void main(String[] args) {
         contaBancaria minhaConta= new contaBancaria();

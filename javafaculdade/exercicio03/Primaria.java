@@ -1,4 +1,4 @@
-package exerciciodefixar.ex003;
+package exercicio03;
 import java.util.Scanner;
 
 public class Primaria {
@@ -11,6 +11,7 @@ public class Primaria {
      int idade=ler.nextInt();
      Pessoa identidade=new Pessoa(nome,idade);
      identidade.getdados();
+     identidade.verificador();
      ler.close();
      
      }

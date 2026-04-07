@@ -1,4 +1,4 @@
-package exerciciodefixar.ex001;
+package exercicio01;
 import java.util.Scanner;
 
 public class Primaria {

@@ -1,4 +1,4 @@
-package Exercicio2;
+package exercicio05;
 
 public class Retangulo {
     private double altura;

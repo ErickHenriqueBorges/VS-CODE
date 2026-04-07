@@ -1,4 +1,4 @@
-package Exercicio3;
+package exercicio06;
 
 public class contaBancaria {
     private String titular="Erick";

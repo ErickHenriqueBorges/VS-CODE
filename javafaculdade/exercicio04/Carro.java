@@ -1,4 +1,4 @@
-package Exercicio1;
+package exercicio04;
 public class Carro {// somente uma class public por arquivo;
     private String marca;
     private String modelo;
