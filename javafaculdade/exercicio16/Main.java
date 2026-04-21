@@ -8,7 +8,7 @@ public class Main {
         do{System.out.println("informe qual veiculo deseja cadastrar: 1-Onibus 2-Caminhao ");
         opcao=ler.nextInt();}while(opcao!=1 && opcao !=2);
         if (opcao==1){
-            System.out.println("qual o ano do Onibus :");
+            System.out.println("qual o ano do Onibus : ");
             int ano=ler.nextInt();
             ler.nextLine();
             System.out.println("Qual a placa do Onibus : ");
